@@ -10,10 +10,10 @@ public class NetworkService {
     private Context context;
     private String apiKey;
 
-    public NetworkService(Context context) {
-        this.context = context;
+    public NetworkService(Context context, String apiKey) {
         // do the initialisation here
-        apiKey = "SOME_API_KEY";
+        this.context = context;
+        this.apiKey = apiKey;
     }
 
     public String getDummyData() {

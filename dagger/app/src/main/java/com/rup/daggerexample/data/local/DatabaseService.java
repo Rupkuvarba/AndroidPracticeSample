@@ -11,11 +11,11 @@ public class DatabaseService {
     private String databaseName;
     private int version;
 
-    public DatabaseService(Context context) {
+    public DatabaseService(Context context, String databaseName, int version) {
         // do the initialisation here
         this.context = context;
-        databaseName = "dummy_db";
-        version = 1;
+        this.databaseName = databaseName;
+        this.version = version;
     }
 
     public String getDummyData() {
