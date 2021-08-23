@@ -17,13 +17,14 @@ Dagger basics:
 - What is dependency injection?
 example:
   
-* Without Dependency Injection (DI):
+ Without Dependency Injection (DI):
   
   class Car{
-   private Wheel wh = new NepaliRubberWheel();
-   private Battery bt = new ExcideBattery();
+   
+     private Wheel wh = new NepaliRubberWheel();
+     private Battery bt = new ExcideBattery();
 
-   //The rest
+    //The rest
   }
 
 Here, the Car object is responsible for creating the dependent objects.
@@ -35,21 +36,23 @@ When using dependency injection, objects are given their dependencies at run tim
 So that we can now change the Wheel whenever we want.
 Here, the dependency (wheel) can be injected into Car at run time.
 
-* After using dependency injection:
+ After using dependency injection:
+ 
   Here, we are injecting the dependencies (Wheel and Battery) at runtime. Hence the term : Dependency Injection.
   We normally rely on DI frameworks such as Spring, Guice, Weld to create the dependencies and inject where needed.
   
 class Car{
-  private Wheel wh; // Inject an Instance of Wheel (dependency of car) at runtime
-  private Battery bt; // Inject an Instance of Battery (dependency of car) at runtime
-  Car(Wheel wh,Battery bt) {
-     this.wh = wh;
-     this.bt = bt;
-  }
-  //Or we can have setters
-  void setWheel(Wheel wh) {
-     this.wh = wh;
-   }
+
+    private Wheel wh; // Inject an Instance of Wheel (dependency of car) at runtime
+    private Battery bt; // Inject an Instance of Battery (dependency of car) at runtime
+    Car(Wheel wh,Battery bt) {
+       this.wh = wh;
+       this.bt = bt;
+    }
+    //Or we can have setters
+    void setWheel(Wheel wh) {
+       this.wh = wh;
+     }
 }
 
 Dependency Injection is a practice where objects are designed in a manner where they receive instances of the objects from other pieces of code, instead of constructing them internally.
