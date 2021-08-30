@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.rup.daggerexample.data.local.DatabaseService;
 import com.rup.daggerexample.data.remote.NetworkService;
+import com.rup.daggerexample.di.DependencyComponent;
 
 public class MyApplication extends Application {
 
@@ -13,7 +14,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        networkService = new NetworkService(this, "SOME_API_KEY");
-        databaseService = new DatabaseService(this, "dummy_db", 1);
+        DependencyComponent.inject(this);
     }
 }
