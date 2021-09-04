@@ -2,15 +2,23 @@ package com.rup.daggerexample.data.remote;
 
 import android.content.Context;
 
+import com.rup.daggerexample.di.qualifier.NetworkInfo;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 /**
  * Dummy class to simulate the actual NetworkService using Retrofit or OkHttp etc
  */
+
+@Singleton
 public class NetworkService {
 
     private Context context;
     private String apiKey;
 
-    public NetworkService(Context context, String apiKey) {
+    @Inject
+    public NetworkService(Context context, @NetworkInfo String apiKey) {
         // do the initialisation here
         this.context = context;
         this.apiKey = apiKey;

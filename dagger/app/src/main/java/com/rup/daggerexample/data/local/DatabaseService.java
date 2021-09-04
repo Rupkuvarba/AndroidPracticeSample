@@ -2,16 +2,24 @@ package com.rup.daggerexample.data.local;
 
 import android.content.Context;
 
+import com.rup.daggerexample.di.qualifier.DatabaseInfo;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 /**
  * Dummy class to simulate the actual Database using Room or Realm etc
  */
+
+@Singleton
 public class DatabaseService {
 
     private Context context;
     private String databaseName;
     private int version;
 
-    public DatabaseService(Context context, String databaseName, int version) {
+    @Inject
+    public DatabaseService(Context context, @DatabaseInfo String databaseName, int version) {
         // do the initialisation here
         this.context = context;
         this.databaseName = databaseName;
