@@ -1,4 +1,4 @@
-package com.app.daggerhilt.ui
+package com.app.daggerhilt.ui.module.splash
 
 import android.os.Bundle
 import android.view.View
@@ -12,17 +12,21 @@ import com.app.daggerhilt.Status
 import com.app.daggerhilt.data.model.User
 import kotlinx.android.synthetic.main.activity_main.*
 import com.app.daggerhilt.R
+import com.app.daggerhilt.ui.MainAdapter
+import com.app.daggerhilt.ui.SplashViewModel
 
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Observer
 
-class MainActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class SplashActivity : AppCompatActivity() {
 
     private val mainViewModel : SplashViewModel by viewModels()
     private lateinit var adapter: MainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_splash)
         setupUI()
         setupObserver()
 
