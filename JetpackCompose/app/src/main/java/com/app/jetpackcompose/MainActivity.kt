@@ -8,16 +8,18 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
-val namesList:ArrayList<String> = arrayListOf(
+/*val namesList:ArrayList<String> = arrayListOf(
     "Bhavin",
     "Chirag",
     "Rup",
     "mital",
-    "Ganpati")
+    "Ganpati")*/
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,11 +73,19 @@ class MainActivity : ComponentActivity() {
         Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally) {
-           for (name in namesList){
-               Greeting(name = name)
+            //To manage state, keep list in mutableStateListOf
+            //After recomposition we want to remember state then use remember block
+            // - remember block is special block in jetpack compose
+            //
+            val greetingListState = remember {
+                mutableStateListOf<String>("Radhe","Krishna")
+            }
+            for (name in greetingListState){
+                println("-----------------------------------$name")
+                Greeting(name = name)
            }
             //On click, recomposition not trigger
-            Button(onClick = { namesList.add("new name") }) {
+            Button(onClick = { greetingListState.add("new name") }) {
               Text(text = "Add new name")
             }
         }

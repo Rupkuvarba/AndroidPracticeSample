@@ -21,3 +21,11 @@ State as part of recomposition:
     - testability,
     - state encapsulation - state update from one place
     - UI consistency - state immediately reflect on screen by observer
+- mutableStateListOf
+    - To manage state, keep list in mutableStateListOf
+   
+- remember block in state
+    - After recomposition we want to remember state then use remember block
+    - remember block is special block in jetpack compose
+    - The state will be remember over the recomposition
+   
