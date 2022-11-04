@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -13,7 +15,11 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 
 /*val namesList:ArrayList<String> = arrayListOf(
@@ -23,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
     "mital",
     "Ganpati")*/
 
+@OptIn(ExperimentalComposeUiApi::class)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,13 +88,22 @@ class MainActivity : ComponentActivity() {
         val greetingListState = remember {
             mutableStateListOf<String>("Radhe","Krishna")
         }
+        val newNameStateContent = remember {
+            mutableStateOf("")
+        }
 
         Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally) {
-            GreetingList(greetingListState) {
-                greetingListState.add("name ${greetingListState.size}")
-            }
+            GreetingList(greetingListState,
+                {
+                    greetingListState.add(newNameStateContent.value)
+                },
+                newNameStateContent.value,
+                { newInput ->
+                    newNameStateContent.value = newInput
+                    println(" ***** * *  * * * * ** * *  $newInput")
+                })
         }
     }
 
@@ -95,25 +111,27 @@ class MainActivity : ComponentActivity() {
     Greeting list function does not know anything about state
      */
     @Composable
-    fun GreetingList(namesList: List<String>, buttonClick: () -> Unit){
+    fun GreetingList(namesList: List<String>,
+                     buttonClick: () -> Unit,
+                     textFieldValue: String,
+                     textFieldValueChange: (value:String) -> Unit){
 
         for (name in namesList){
             println("-----------------------------------$name")
             Greeting(name = name)
         }
 
-        val newNameStateContent = remember {
-            mutableStateOf("")
-        }
-        TextField(value = newNameStateContent.value, onValueChange = {
-            newInput ->
-            newNameStateContent.value = newInput
-
-            println(" ***** * *  * * * * ** * *  $newInput")
-        } )
+        val keyboardController = LocalSoftwareKeyboardController.current
+        TextField(value = textFieldValue,
+            onValueChange =  textFieldValueChange
+                ,keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done, keyboardType = KeyboardType.Text),
+        keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() }),
+        singleLine = true
+        )
 
         //On click, recomposition not trigger
         Button(onClick = buttonClick) {
+            println(" $  4$4 $ $ 4 4 $ $ $ $$ $  button text")
             Text(text = "Add new name")
         }
     }
