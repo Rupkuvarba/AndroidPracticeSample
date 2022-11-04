@@ -18,7 +18,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 //@InstallIn annotation to install it in ApplicationComponent.
 //ApplicationComponent is provided by Dagger-Hilt.
-//This means that the dependencies provided here will be used across the application. Let's consider that we want to use at the activity level we install the module in,
+//This means that the dependencies provided here will be used across the application.
+// Let's consider that we want to use at the activity level we install the module in,
 class ApplicationModule {
 
     @Provides

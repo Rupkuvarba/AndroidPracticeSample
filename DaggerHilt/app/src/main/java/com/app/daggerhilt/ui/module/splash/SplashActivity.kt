@@ -5,23 +5,20 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.*
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.daggerhilt.R
 import com.app.daggerhilt.Status
 import com.app.daggerhilt.data.model.User
-import kotlinx.android.synthetic.main.activity_main.*
-import com.app.daggerhilt.R
 import com.app.daggerhilt.ui.MainAdapter
-import com.app.daggerhilt.ui.SplashViewModel
-
+import com.app.daggerhilt.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Observer
+import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
-    private val mainViewModel : SplashViewModel by viewModels()
+    private val splashViewModel: SplashViewModel by viewModels()
     private lateinit var adapter: MainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +42,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun setupObserver() {
-        mainViewModel.users.observe(this, Observer {
+        splashViewModel.users.observe(this) {
             when (it.status) {
                 Status.SUCCESS -> {
                     progressBar.visibility = View.GONE
@@ -61,7 +58,7 @@ class SplashActivity : AppCompatActivity() {
                     Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                 }
             }
-        })
+        }
     }
 
     private fun renderList(users: List<User>) {
