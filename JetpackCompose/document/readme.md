@@ -29,3 +29,5 @@ State as part of recomposition:
     - remember block is special block in jetpack compose
     - The state will be remember over the recomposition
    
+- Lift up state (State hoisting)
+    - MainScreen composable function is main entry point for states and state updates which happen on click

@@ -67,18 +67,11 @@ class MainActivity : ComponentActivity() {
         MainScreen()
     }
 
+    /*
+    MainScreen composable is main entry point for states and state updates which happen on click
+     */
     @Composable
     fun MainScreen() {
-        //Text(text = "Hello $name!")
-        Column(modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceEvenly,
-        horizontalAlignment = Alignment.CenterHorizontally) {
-            GreetingList()
-        }
-    }
-
-    @Composable
-    fun GreetingList(){
         //To manage state, keep list in mutableStateListOf
         //After recomposition we want to remember state then use remember block
         // - remember block is special block in jetpack compose
@@ -86,12 +79,28 @@ class MainActivity : ComponentActivity() {
         val greetingListState = remember {
             mutableStateListOf<String>("Radhe","Krishna")
         }
-        for (name in greetingListState){
+
+        Column(modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally) {
+            GreetingList(greetingListState) {
+                greetingListState.add("name ${greetingListState.size}")
+            }
+        }
+    }
+
+    /*
+    Greeting list function does not know anything about state
+     */
+    @Composable
+    fun GreetingList(namesList: List<String>, buttonClick: () -> Unit){
+
+        for (name in namesList){
             println("-----------------------------------$name")
             Greeting(name = name)
         }
         //On click, recomposition not trigger
-        Button(onClick = { greetingListState.add("name ${greetingListState.size}") }) {
+        Button(onClick = buttonClick) {
             Text(text = "Add new name")
         }
     }
