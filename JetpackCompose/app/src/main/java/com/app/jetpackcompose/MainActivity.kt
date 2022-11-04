@@ -73,21 +73,26 @@ class MainActivity : ComponentActivity() {
         Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally) {
-            //To manage state, keep list in mutableStateListOf
-            //After recomposition we want to remember state then use remember block
-            // - remember block is special block in jetpack compose
-            //
-            val greetingListState = remember {
-                mutableStateListOf<String>("Radhe","Krishna")
-            }
-            for (name in greetingListState){
-                println("-----------------------------------$name")
-                Greeting(name = name)
-           }
-            //On click, recomposition not trigger
-            Button(onClick = { greetingListState.add("new name") }) {
-              Text(text = "Add new name")
-            }
+            GreetingList()
+        }
+    }
+
+    @Composable
+    fun GreetingList(){
+        //To manage state, keep list in mutableStateListOf
+        //After recomposition we want to remember state then use remember block
+        // - remember block is special block in jetpack compose
+        //
+        val greetingListState = remember {
+            mutableStateListOf<String>("Radhe","Krishna")
+        }
+        for (name in greetingListState){
+            println("-----------------------------------$name")
+            Greeting(name = name)
+        }
+        //On click, recomposition not trigger
+        Button(onClick = { greetingListState.add("name ${greetingListState.size}") }) {
+            Text(text = "Add new name")
         }
     }
 }
