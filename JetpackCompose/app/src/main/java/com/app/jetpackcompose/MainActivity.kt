@@ -3,21 +3,14 @@ package com.app.jetpackcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 val namesList:ArrayList<String> = arrayListOf(
     "Bhavin",
@@ -39,11 +32,11 @@ class MainActivity : ComponentActivity() {
         }*/
         setContent {
             Column() {
-                MaterialTheme {
-                    Greeting(name = "Android \n\nHi Rup!!\n\nWelcome on the board")
+                /*MaterialTheme {
+                    Greeting(name = "Hi Rup!!\n\nWelcome on the board")
                     // Greeting()
-                }
-                GreetingList(names = namesList)
+                }*/
+                MainScreen()
             }
 
         }
@@ -66,18 +59,19 @@ class MainActivity : ComponentActivity() {
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreviewMainActivity() {
-        MaterialTheme {
+        /*MaterialTheme {
             Greeting( "SiddhaRajsinh !")
-        }
+        }*/
+        MainScreen()
     }
 
     @Composable
-    fun GreetingList(names: List<String>) {
+    fun MainScreen() {
         //Text(text = "Hello $name!")
         Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally) {
-           for (name in names){
+           for (name in namesList){
                Greeting(name = name)
            }
             //On click, recomposition not trigger
