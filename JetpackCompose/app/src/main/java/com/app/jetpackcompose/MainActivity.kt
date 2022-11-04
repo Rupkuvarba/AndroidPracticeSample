@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-val namesList:List<String> = listOf(
+val namesList:ArrayList<String> = arrayListOf(
     "Bhavin",
     "Chirag",
     "Rup",
@@ -80,7 +80,8 @@ class MainActivity : ComponentActivity() {
            for (name in names){
                Greeting(name = name)
            }
-            Button(onClick = { /*namesList.add("new name")*/ }) {
+            //On click, recomposition not trigger
+            Button(onClick = { namesList.add("new name") }) {
               Text(text = "Add new name")
             }
         }
