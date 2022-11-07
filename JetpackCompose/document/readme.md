@@ -31,3 +31,15 @@ State as part of recomposition:
    
 - Lift up state (State hoisting)
     - MainScreen composable function is main entry point for states and state updates which happen on click
+    
+- 45. Introduction to view model and live data
+    - It is a part of jetpack framework (jetpack component)
+    - View model - it is a class that is responsible for preparing and managing the state of the UI for fragments and Activities
+    
+- View model has a relationship with the view to prepare data and has to be displayed as a presentation role in order to display on the screen
+      View binds to view model and expect some input data like may be text, list,
+      The view is dependent on the UI state.
+
+   -  Live data- It is a lifecycle-aware observable data holder
+   - Fragment and activity observe the changes of live data. 
+   - Live data does not know who is observing it. It has to notify if it’s change 

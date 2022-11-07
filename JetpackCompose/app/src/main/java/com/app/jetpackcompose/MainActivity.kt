@@ -3,6 +3,7 @@ package com.app.jetpackcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -11,9 +12,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -31,6 +30,8 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalComposeUiApi::class)
 class MainActivity : ComponentActivity() {
+    val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,9 +48,8 @@ class MainActivity : ComponentActivity() {
                     Greeting(name = "Hi Rup!!\n\nWelcome on the board")
                     // Greeting()
                 }*/
-                MainScreen()
+                MainScreen(viewModel)
             }
-
         }
     }
 
@@ -73,37 +73,30 @@ class MainActivity : ComponentActivity() {
         /*MaterialTheme {
             Greeting( "SiddhaRajsinh !")
         }*/
-        MainScreen()
+        MainScreen(viewModel)
     }
 
     /*
     MainScreen composable is main entry point for states and state updates which happen on click
      */
     @Composable
-    fun MainScreen() {
+    fun MainScreen(viewModel: MainViewModel) {
         //To manage state, keep list in mutableStateListOf
         //After recomposition we want to remember state then use remember block
         // - remember block is special block in jetpack compose
         //
-        val greetingListState = remember {
-            mutableStateListOf<String>("Radhe","Krishna")
-        }
-        val newNameStateContent = remember {
-            mutableStateOf("")
-        }
+        val newNameStateContent = viewModel.textFieldState.observeAsState("Hiomt")
+        println(" $  4$4 $ $ 4 4 $ $ $ $$ $  MainScreen newNameStateContent $newNameStateContent")
 
         Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally) {
-            GreetingList(greetingListState,
-                {
-                    greetingListState.add(newNameStateContent.value)
-                },
-                newNameStateContent.value,
-                { newInput ->
-                    newNameStateContent.value = newInput
-                    println(" ***** * *  * * * * ** * *  $newInput")
-                })
+            GreetingMessage(
+                newNameStateContent.value
+            ) { newInput ->
+                println(" ***** * *  * * * * ** * *  $newInput")
+                viewModel.onTextChanged(newInput)
+            }
         }
     }
 
@@ -111,28 +104,25 @@ class MainActivity : ComponentActivity() {
     Greeting list function does not know anything about state
      */
     @Composable
-    fun GreetingList(namesList: List<String>,
-                     buttonClick: () -> Unit,
-                     textFieldValue: String,
-                     textFieldValueChange: (value:String) -> Unit){
+    fun GreetingMessage(textFieldValue: String,
+                        textFieldValueChange: (value:String) -> Unit){
 
-        for (name in namesList){
-            println("-----------------------------------$name")
-            Greeting(name = name)
-        }
-
-        val keyboardController = LocalSoftwareKeyboardController.current
+        println(" $  4$4 $ $ 4 4 $ $ $ $$ $  GreetingMessage $textFieldValue")
+        /*val keyboardController = LocalSoftwareKeyboardController.current
         TextField(value = textFieldValue,
             onValueChange =  textFieldValueChange
                 ,keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done, keyboardType = KeyboardType.Text),
         keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() }),
         singleLine = true
-        )
+        )*/
+
+        TextField(value = textFieldValue,
+            onValueChange =  textFieldValueChange)
 
         //On click, recomposition not trigger
-        Button(onClick = buttonClick) {
-            println(" $  4$4 $ $ 4 4 $ $ $ $$ $  button text")
-            Text(text = "Add new name")
+        Button(onClick = {}) {
+           // println(" $  4$4 $ $ 4 4 $ $ $ $$ $  button text")
+            Text(textFieldValue)
         }
     }
 }
