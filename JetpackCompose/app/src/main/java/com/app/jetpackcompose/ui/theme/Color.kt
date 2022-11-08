@@ -16,6 +16,8 @@
 
 package com.app.jetpackcompose.ui.theme
 
+import androidx.compose.material.Colors
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 val Red200 = Color(0xfff297a2)
@@ -23,3 +25,11 @@ val Red300 = Color(0xffea6d7e)
 val Red700 = Color(0xffdd0d3c)
 val Red800 = Color(0xffd00036)
 val Red900 = Color(0xffc20029)
+
+val surfaceColor = Color(0xFF611222)
+
+val imageBorderColor = Color(0xFFE91E63)
+
+val Colors.imageBorderStroke: Color
+    @Composable
+    get() = imageBorderColor

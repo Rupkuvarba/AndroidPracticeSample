@@ -29,6 +29,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.app.jetpackcompose.ui.theme.JetNewsTheme
+import com.app.jetpackcompose.ui.theme.imageBorderStroke
 
 @OptIn(ExperimentalComposeUiApi::class)
 class MainActivity : ComponentActivity() {
@@ -57,8 +58,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun MainScreen() {
        Surface(
-           modifier = Modifier.fillMaxSize(),
-           color = Color.Gray) {
+           modifier = Modifier.fillMaxSize()) {
            ProfileCard()
        }
     }
@@ -70,7 +70,9 @@ class MainActivity : ComponentActivity() {
                 .padding(16.dp)
                 .fillMaxWidth()
                 .wrapContentHeight(align = Alignment.Top),
-            elevation = 8.dp) {
+            elevation = 8.dp,
+            backgroundColor = Color.White
+        ) {
                Row(modifier = Modifier.fillMaxWidth(),
                    verticalAlignment = Alignment.CenterVertically,
                horizontalArrangement = Arrangement.Start) {
@@ -83,7 +85,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun ProfilePicture(){
        Card(shape = CircleShape,
-       border = BorderStroke(width = 2.dp, color = Color.Green),
+       border = BorderStroke(width = 2.dp, color = MaterialTheme.colors.imageBorderStroke),
        modifier = Modifier.padding(16.dp),
        elevation = 4.dp
        ) {
