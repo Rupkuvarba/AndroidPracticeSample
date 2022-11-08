@@ -50,7 +50,8 @@ val JetnewsTypography = Typography(
     h5 = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.W600,
-        fontSize = 24.sp
+        fontSize = 22.sp,
+        letterSpacing = 1.sp
     ),
     h6 = TextStyle(
         fontFamily = Montserrat,
