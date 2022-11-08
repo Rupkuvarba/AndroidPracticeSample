@@ -49,4 +49,11 @@ State as part of recomposition:
    - Composition local - https://www.jetpackcompose.net/image-in-jetpack-compose 
    - CompositionLocalProvider: 
       CompositionLocalProvider helps you apply a specific alpha to all the composables used inside its scope
-   -   
+   - UI-theme like shape, background color, theme, and font type
+     - Composable UI has default property like shape, background color, theme, and font type.
+     - You can change it by customize theme
+   - UI-Customize color like surface color, app bar background color, card background color etc
+   - UI shape : composable has default shape property, you can change it by own customize theme.
+     like card background cut from start top and end top. 
+    - 
+    
