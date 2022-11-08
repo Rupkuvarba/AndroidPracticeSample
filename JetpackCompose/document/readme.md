@@ -43,3 +43,8 @@ State as part of recomposition:
    -  Live data- It is a lifecycle-aware observable data holder
    - Fragment and activity observe the changes of live data. 
    - Live data does not know who is observing it. It has to notify if it’s change 
+    
+- UI 
+   - Image - https://www.jetpackcompose.net/image-in-jetpack-compose
+   - Composition local - https://www.jetpackcompose.net/image-in-jetpack-compose 
+   - 

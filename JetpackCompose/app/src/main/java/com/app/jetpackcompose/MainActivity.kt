@@ -1,5 +1,6 @@
 package com.app.jetpackcompose
 
+import android.graphics.Paint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,6 +13,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.tooling.LocalInspectionTables
 import androidx.compose.ui.Alignment
@@ -59,10 +61,10 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun ProfileCard(){
         Card(
-            modifier = Modifier.
-                padding(16.dp).
-                fillMaxWidth().
-                wrapContentHeight(align = Alignment.Top),
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+                .wrapContentHeight(align = Alignment.Top),
             elevation = 8.dp) {
                Row(modifier = Modifier.fillMaxWidth(),
                    verticalAlignment = Alignment.CenterVertically,
@@ -92,7 +94,23 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun ProfileContent(){
-       Text(text = "Hello Rup!!")
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)) {
+            Text(
+                text = "Rup Barad",
+                style = MaterialTheme.typography.h5
+            )
+           //If you're on the Beta version of Compose, use CompositionLocalProvider instead of Providers.
+           CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.disabled) {
+                Text(
+                    text = "Active Now",
+                    style = MaterialTheme.typography.body2
+                )
+            }
+
+        }
+
     }
 }
 
