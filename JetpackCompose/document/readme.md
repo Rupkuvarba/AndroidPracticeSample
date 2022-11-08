@@ -47,4 +47,6 @@ State as part of recomposition:
 - UI 
    - Image - https://www.jetpackcompose.net/image-in-jetpack-compose
    - Composition local - https://www.jetpackcompose.net/image-in-jetpack-compose 
-   - 
+   - CompositionLocalProvider: 
+      CompositionLocalProvider helps you apply a specific alpha to all the composables used inside its scope
+   -   

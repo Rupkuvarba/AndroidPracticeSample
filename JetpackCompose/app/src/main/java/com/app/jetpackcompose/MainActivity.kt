@@ -102,15 +102,18 @@ class MainActivity : ComponentActivity() {
                 style = MaterialTheme.typography.h5
             )
            //If you're on the Beta version of Compose, use CompositionLocalProvider instead of Providers.
+           //CompositionLocalProvider helps you apply a specific alpha to all the composables used inside its scope
            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.disabled) {
                 Text(
                     text = "Active Now",
                     style = MaterialTheme.typography.body2
                 )
+               Text(
+                   text = "Rup Barad",
+                   style = MaterialTheme.typography.h5
+               )
             }
-
         }
-
     }
 }
 
