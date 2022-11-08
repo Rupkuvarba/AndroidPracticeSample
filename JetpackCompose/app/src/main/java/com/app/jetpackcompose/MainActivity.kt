@@ -28,6 +28,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.app.jetpackcompose.ui.theme.JetNewsTheme
 
 @OptIn(ExperimentalComposeUiApi::class)
 class MainActivity : ComponentActivity() {
@@ -36,14 +37,18 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen()
+            JetNewsTheme {
+                MainScreen()
+            }
         }
     }
 
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreviewMainActivity() {
-        MainScreen()
+        JetNewsTheme {
+            MainScreen()
+        }
     }
 
     /*
@@ -108,10 +113,6 @@ class MainActivity : ComponentActivity() {
                     text = "Active Now",
                     style = MaterialTheme.typography.body2
                 )
-               Text(
-                   text = "Rup Barad",
-                   style = MaterialTheme.typography.h5
-               )
             }
         }
     }
