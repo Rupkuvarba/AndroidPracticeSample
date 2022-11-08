@@ -55,5 +55,5 @@ State as part of recomposition:
    - UI-Customize color like surface color, app bar background color, card background color etc
    - UI shape : composable has default shape property, you can change it by own customize theme.
      like card background cut from start top and end top. 
-    - 
+    - Font type Customize : Font family, Font weight, font size and letter spacing
     
