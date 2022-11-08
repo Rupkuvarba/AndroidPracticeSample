@@ -26,7 +26,7 @@ val Red700 = Color(0xffdd0d3c)
 val Red800 = Color(0xffd00036)
 val Red900 = Color(0xffc20029)
 
-val surfaceColor = Color(0xFF611222)
+val surfaceColor = Color(0xFFFAF7F8)
 
 val imageBorderColor = Color(0xFFE91E63)
 
