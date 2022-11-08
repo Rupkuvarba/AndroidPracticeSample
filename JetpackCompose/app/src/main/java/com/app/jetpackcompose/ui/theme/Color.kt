@@ -28,8 +28,13 @@ val Red900 = Color(0xffc20029)
 
 val surfaceColor = Color(0xFFFAF7F8)
 
-val imageBorderColor = Color(0xFFE91E63)
+val imageBorderColor = Color(0xFF4CAF50)
+val imageBorderColorOffline = Color(0xFFE91E63)
 
 val Colors.imageBorderStroke: Color
     @Composable
     get() = imageBorderColor
+
+val Colors.imageBorderStrokeOffline: Color
+    @Composable
+    get() = imageBorderColorOffline

@@ -20,8 +20,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.app.jetpackcompose.data.model.UserProfile
+import com.app.jetpackcompose.data.model.userProfileList
 import com.app.jetpackcompose.ui.theme.JetNewsTheme
 import com.app.jetpackcompose.ui.theme.imageBorderStroke
+import com.app.jetpackcompose.ui.theme.imageBorderStrokeOffline
 
 @OptIn(ExperimentalComposeUiApi::class)
 class MainActivity : ComponentActivity() {
@@ -55,8 +58,9 @@ class MainActivity : ComponentActivity() {
                    .fillMaxSize()
                    .padding(it)) {
                Column {
-                   ProfileCard()
-                   ProfileCard()
+                   for(userProfile in userProfileList){
+                       ProfileCard(userProfile)
+                   }
                }
 
            }
@@ -76,7 +80,7 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun ProfileCard(){
+    fun ProfileCard(userProfile: UserProfile){
         Card(
             modifier = Modifier
                 .padding(top = 8.dp, bottom = 4.dp, start = 16.dp, end = 16.dp )
@@ -88,21 +92,26 @@ class MainActivity : ComponentActivity() {
                Row(modifier = Modifier.fillMaxWidth(),
                    verticalAlignment = Alignment.CenterVertically,
                horizontalArrangement = Arrangement.Start) {
-                ProfilePicture()
-                ProfileContent()
+                ProfilePicture(userProfile.drawableId, userProfile.status)
+                ProfileContent(userProfile.name, userProfile.status)
             }
         }
     }
 
     @Composable
-    fun ProfilePicture(){
+    fun ProfilePicture(drawableId:Int, onlineStatus:Boolean){
        Card(shape = CircleShape,
-       border = BorderStroke(width = 2.dp, color = MaterialTheme.colors.imageBorderStroke),
+       border = BorderStroke(width = 2.dp,
+           color = if(onlineStatus)
+               MaterialTheme.colors.imageBorderStroke
+           else
+               MaterialTheme.colors.imageBorderStrokeOffline
+       ) ,
        modifier = Modifier.padding(16.dp),
        elevation = 4.dp
        ) {
            Image(
-               painter = painterResource(id = R.drawable.profile_picture_1),
+               painter = painterResource(id = drawableId),
                contentDescription = "content description",
                modifier = Modifier.size(72.dp),
                contentScale = ContentScale.Crop
@@ -112,19 +121,28 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun ProfileContent(){
+    fun ProfileContent(name:String, onlineStatus:Boolean){
         Column(modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)) {
-            Text(
-                text = "Rup Barad",
-                style = MaterialTheme.typography.h5
-            )
+
+            CompositionLocalProvider(
+                LocalContentAlpha provides if(onlineStatus)
+                    1f else ContentAlpha.medium) {
+                Text(
+                    text = name,
+                    style = MaterialTheme.typography.h5
+                )
+            }
+
            //If you're on the Beta version of Compose, use CompositionLocalProvider instead of Providers.
            //CompositionLocalProvider helps you apply a specific alpha to all the composables used inside its scope
            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.disabled) {
                 Text(
-                    text = "Active Now",
+                    text = if(onlineStatus)
+                        "Active Now"
+                    else
+                        "Offline",
                     style = MaterialTheme.typography.body2
                 )
             }
